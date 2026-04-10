@@ -1,2 +1,64 @@
-# regulatory-submissions-pipeline
-AI-powered regulatory document automation covering eCTD submissions, IND/NDA/BLA generation, medical translation and precision medicine biomarker analysis
+# Regulatory Submissions Pipeline
+
+An AI-powered regulatory document automation platform covering the full submission lifecycle — from IND through NDA/BLA — with LLM-powered document generation, medical translation, precision medicine biomarker analysis, and drug discovery screening.
+
+[![Python](https://img.shields.io/badge/Python-3.10%2B-blue)](https://www.python.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![FDA](https://img.shields.io/badge/Standard-FDA%20eCTD%203.2.2-red)](https://www.fda.gov/)
+[![EMA](https://img.shields.io/badge/Standard-EMA%20eCTD-orange)](https://www.ema.europa.eu/)
+
+---
+
+## Pipeline Overview
+
+| Module | Files | Description |
+|--------|-------|-------------|
+| `src/ectd/` | `submission.py`, `validator.py` | eCTD package builder, FDA/EMA validation |
+| `src/documents/` | `ind_generator.py`, `nda_generator.py` | IND/NDA/BLA document auto-generation |
+| `src/translation/` | `medical_translator.py`, `term_validator.py` | LLM medical translation + terminology validation |
+| `src/precision/` | `biomarker.py`, `patient_stratification.py` | Biomarker analysis, ML patient stratification |
+| `src/drug_discovery/` | `target_predictor.py`, `molecule_screener.py` | ML target prediction, virtual screening |
+
+---
+
+## Key Features
+
+- **eCTD Builder** — Automated eCTD 3.2.2 submission package construction with FDA/EMA conformance validation
+- **IND/NDA/BLA Generator** — LLM-powered generation of Module 2 summaries, clinical overviews, and nonclinical written summaries
+- **Medical Translation** — GPT-4o powered translation pipeline with MedDRA/SNOMED terminology validation across 12 languages
+- **Precision Medicine** — Biomarker-driven patient stratification using ML clustering and predictive modeling
+- **Drug Discovery** — ML-based target binding prediction and virtual compound screening
+
+---
+
+## Tech Stack
+
+| Category | Libraries |
+|----------|-----------|
+| LLM/NLP | openai, langchain, transformers, spaCy |
+| ML/DL | scikit-learn, TensorFlow, XGBoost |
+| Bioinformatics | RDKit, BioPython, DeepChem |
+| Document Generation | python-docx, reportlab, Jinja2 |
+| Regulatory | lxml, xmlschema, PyPDF2 |
+| Testing | pytest, pytest-cov |
+
+---
+
+## Regulatory Standards
+
+- FDA eCTD Technical Specifications v3.2.2
+- EMA eCTD Implementation Guide
+- ICH M4 — Common Technical Document (CTD)
+- ICH E3 — Clinical Study Reports
+- ICH Q2(R1) — Validation of Analytical Procedures
+- MedDRA 26.0 Terminology
+- SNOMED CT
+
+---
+
+## Author
+
+**Girish Rajeev**
+Clinical Data Scientist | Data Analyst | Regulatory Standards Leader | AI/ML Solution Engineer
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue)](https://www.linkedin.com/in/girish-rajeev-756808138/)
