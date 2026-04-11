@@ -1,0 +1,112 @@
+yaml# Regulatory Submissions Pipeline — Docker Compose
+#
+# Services:
+#   submissions  — eCTD package builder and validator
+#   translator   — Medical document translation pipeline
+#   tests        — Full test suite runner
+#
+# Usage:
+#   docker-compose up submissions
+#   docker-compose up tests
+#
+# Author: Girish Rajeev
+
+version: "3.9"
+
+services:
+
+  # ── eCTD Submissions service ───────────────────────────────────────────────
+  submissions:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    container_name: regulatory-submissions
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - PYTHONPATH=/app
+      - ENV=${ENV:-production}
+      - SUBMISSIONS_DIR=/app/submissions
+    volumes:
+      - ./data:/app/data
+      - submissions_output:/app/submissions
+      - reg_logs:/app/logs
+    command: >
+      python -c "
+      from src.ectd.submission import eCTDBuilder;
+      from src.ectd.validator import eCTDValidator;
+      print('Regulatory Submissions Pipeline ready.');
+      print('Modules: ectd, documents, translation, precision, drug_discovery')
+      "
+    restart: "no"
+
+  # ── Medical translation service ────────────────────────────────────────────
+  translator:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    container_name: medical-translator
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - PYTHONPATH=/app
+      - TRANSLATIONS_DIR=/app/translations
+    volumes:
+      - translations_output:/app/translations
+      - reg_logs:/app/logs
+    command: >
+      python -c "
+      from src.translation.medical_translator import MedicalTranslator;
+      from src.translation.term_validator import MedicalTermValidator;
+      print('Medical Translation Pipeline ready.');
+      print('Supported languages: en, fr, de, es, it, pt, ja, zh, ko, nl, pl, ru')
+      "
+    restart: "no"
+
+  # ── Test runner ────────────────────────────────────────────────────────────
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    container_name: regulatory-tests
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-test-key}
+      - PYTHONPATH=/app
+    volumes:
+      - ./data:/app/data
+    command: >
+      python -m pytest tests/ -v
+      --cov=src
+      --cov-report=term-missing
+      --tb=short
+    restart: "no"
+
+  # ── Development shell ──────────────────────────────────────────────────────
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: builder
+    container_name: regulatory-dev
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - PYTHONPATH=/app
+      - ENV=development
+    volumes:
+      - ./src:/app/src
+      - ./tests:/app/tests
+      - ./data:/app/data
+    command: /bin/bash
+    stdin_open: true
+    tty: true
+    profiles:
+      - dev
+
+volumes:
+  submissions_output:
+    driver: local
+  translations_output:
+    driver: local
+  reg_logs:
+    driver: local
