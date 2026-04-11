@@ -81,16 +81,19 @@ Drug Discovery         —  QSAR prediction · ADMET · virtual screening
 FDA / EMA eCTD Submission Package
 ```
 
+---
+
 ## Tech Stack
 
 | Category | Libraries |
 |----------|-----------|
-| LLM/NLP | openai, langchain, transformers, spaCy |
-| ML/DL | scikit-learn, TensorFlow, XGBoost |
-| Bioinformatics | RDKit, BioPython, DeepChem |
-| Document Generation | python-docx, reportlab, Jinja2 |
-| Regulatory | lxml, xmlschema, PyPDF2 |
-| Testing | pytest, pytest-cov |
+| LLM / NLP | openai, langchain, langchain-openai, transformers, spacy |
+| ML / DL | TensorFlow, Keras, scikit-learn, XGBoost, scipy |
+| Regulatory / XML | lxml, xmlschema |
+| FHIR | fhir.resources, requests |
+| Document generation | python-docx, reportlab, Jinja2, PyMuPDF |
+| Serving | FastAPI, uvicorn, pydantic |
+| Testing | pytest, pytest-cov, pytest-asyncio |
 
 ---
 
