@@ -31,6 +31,38 @@ An AI-powered regulatory document automation platform covering the full submissi
 
 ---
 
+### Repository Structure
+
+```
+regulatory-submissions-pipeline/
+├── .github/workflows/ci.yml        # GitHub Actions CI pipeline
+├── src/
+│   ├── ectd/
+│   │   ├── submission.py           # eCTD package builder
+│   │   └── validator.py            # FDA/EMA conformance validator
+│   ├── documents/
+│   │   ├── ind_generator.py        # IND CTD Module 2 generator
+│   │   └── nda_generator.py        # NDA/BLA CTD Module 2 generator
+│   ├── translation/
+│   │   ├── medical_translator.py   # 12-language medical translator
+│   │   └── term_validator.py       # MedDRA/SNOMED CT validator
+│   ├── precision/
+│   │   ├── biomarker.py            # Predictive biomarker analysis
+│   │   └── patient_stratification.py  # ML patient clustering
+│   └── drug_discovery/
+│       ├── target_predictor.py     # QSAR binding affinity model
+│       └── molecule_screener.py    # Virtual screening pipeline
+├── tests/
+│   └── test_regulatory.py
+├── notebooks/
+├── data/
+├── Dockerfile
+├── docker-compose.yml
+├── requirements.txt
+└── README.md
+```
+
+
 ## Architecture
 
 ```
