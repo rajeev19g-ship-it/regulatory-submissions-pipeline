@@ -31,6 +31,24 @@ An AI-powered regulatory document automation platform covering the full submissi
 
 ---
 
+## Architecture
+
+```
+Raw Clinical / Nonclinical Data
+         ↓
+eCTD Builder           —  CTD folder structure · backbone XML · document registry
+         ↓
+IND / NDA / BLA Docs   —  CTD Module 2 sections · ICH M4E(R2) · GPT-4o drafting
+         ↓
+Medical Translation    —  12 languages · back-translation QC · MedDRA validation
+         ↓
+Precision Medicine     —  Biomarker analysis · patient stratification · CDx
+         ↓
+Drug Discovery         —  QSAR prediction · ADMET · virtual screening
+         ↓
+FDA / EMA eCTD Submission Package
+```
+
 ## Tech Stack
 
 | Category | Libraries |
